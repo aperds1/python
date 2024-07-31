@@ -95,9 +95,12 @@ def page_4():
             st.snow()
         if word == 'birthday':
             st.balloons()
+        if word == 'kind':
+            st.image('kind.jpg')
+            st.code('''# 恭喜你触发彩蛋，因为他善''')
+            
         if word == 'genshin':
             st.image("yuanshen.jpg")
-            st.balloons()
             st.code('''# 恭喜你触发彩蛋，原神启动''')
         if word == "":
             st.write("")
