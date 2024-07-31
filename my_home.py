@@ -27,8 +27,7 @@ def page_2():
         if number1 == 255 and number2 == 255 and number3 == 255:
             st.image("yuanshen.jpg")
             st.balloons()
-            st.code('''
-                # 恭喜你触发彩蛋，原神启动''')
+            st.code('''# 恭喜你触发彩蛋，原神启动''')
         else:
             st.image(img_change(img,number1,number2,number3))
         
@@ -96,6 +95,10 @@ def page_4():
             st.snow()
         if word == 'birthday':
             st.balloons()
+        if word == 'genshin':
+            st.image("yuanshen.jpg")
+            st.balloons()
+            st.code('''# 恭喜你触发彩蛋，原神启动''')
         if word == "":
             st.write("")
     elif word not in words_dict:
@@ -120,7 +123,11 @@ def page_5():
         elif i[1] == 'Json':
             with st.chat_message('J'):
                 st.write(i[1],':',i[2])
-    name = st.selectbox('我是……', ['阿短', '编程猫','Json'])
+        elif i[1] == '匿名用户':
+            with st.chat_message('?'):
+                st.write(i[1],':',i[2])
+        
+    name = st.selectbox('我是……', ['阿短', '编程猫','Json','匿名用户'])
     new_message = st.text_input('想要说的话……')
     if st.button('留言'):
         messages_list.append([str(int(messages_list[-1][0])+1), name, new_message])
