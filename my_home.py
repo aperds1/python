@@ -6,7 +6,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from cloud import ciyvn
 from p_change import img_change
-page = st.sidebar.radio('我的首页', ['我的兴趣推荐', '我的图片处理工具', '我的智能词典', '我的留言区'])
+page = st.sidebar.radio('我的首页', ['我的兴趣推荐', '我的图片处理工具', '词云生成小工具','我的智能词典', '我的留言区'])
 
 def page_1(): 
     '''我的兴趣推荐'''
@@ -19,22 +19,22 @@ def page_2():
     uploaded_file = st.file_uploader("上传图片", type=[ 'png', 'jpeg', 'jpg'])
     if uploaded_file :
     #并获取图片文件的名称、类型和大小
-        file_name = uploaded_file.name
-        file_type = uploaded_file.type
-        file_size = uploaded_file.size
         img = Image.open(uploaded_file)
         st.image(img)
-        tab1,tab2,tab3,tab4= st.tabs(['改色1','改色2' , '改色3' , '改色4'])
-        with tab1:
-            st.image(img_change(img,0,2,1))
-        with tab2:
-            st.image(img_change(img,1,2,0))
-        with tab3:
-            st.image(img_change(img,1,0,2))
-        with tab4:
-            st.image(img_change(img,2,0,1))
-    st.write('----------------------------------')
+        number1 = st.slider(':red[R]',1,255,0)
+        number2 = st.slider(':green[G]',1,255,0)
+        number3 = st.slider(':blue[B]',1,255,0)
+        if number1 == 255 and number2 == 255 and number3 == 255:
+            st.image("yuanshen.jpg")
+            st.balloons()
+            st.code('''
+                # 恭喜你触发彩蛋，原神启动''')
+        else:
+            st.image(img_change(img,number1,number2,number3))
+        
     
+
+def page_3():
     st.write(':orange[词云生成小工具]')
     uploaded_file =st.file_uploader("Choose a file")
     if uploaded_file is not None:
@@ -45,7 +45,7 @@ def page_2():
         pass
 
 
-def page_3():
+def page_4():
     '''我的智能词典'''
     st.write(':blue[智能词典]')
     # 从本地文件中将词典信息读取出来，并存储在列表中
@@ -103,7 +103,7 @@ def page_3():
     
     
 
-def page_4():
+def page_5():
     st.write('我的留言区')
     # 从文件中加载内容，并处理成列表
     with open('leave_messages.txt', 'r', encoding='utf-8') as f:
@@ -137,7 +137,9 @@ if page == '我的兴趣推荐':
     page_1()
 elif page == '我的图片处理工具':
     page_2()
-elif page == '我的智能词典':
+elif page == '词云生成小工具':
     page_3()
-elif page == '我的留言区':
+elif page == '我的智能词典':
     page_4()
+elif page == '我的留言区':
+    page_5()
